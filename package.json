@@ -1,0 +1,33 @@
+{
+  "name": "currencies_app",
+  "version": "1.0.0",
+  "description": "Currencies app which will show all your favorites currencies, fetched from NBP API",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "serve": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Starnaw98/Recruitment-app.git"
+  },
+  "author": "Pawel Starnawski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Starnaw98/Recruitment-app/issues"
+  },
+  "homepage": "https://github.com/Starnaw98/Recruitment-app#readme",
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.5",
+    "babel-loader": "^8.2.1",
+    "html-webpack-plugin": "^4.5.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "terser-webpack-plugin": "^5.0.3",
+    "webpack": "^5.5.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
