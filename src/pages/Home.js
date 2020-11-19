@@ -1,27 +1,30 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import {connect} from "react-redux";
-import {get_currencies} from "../redux";
+import {save_currencies} from "../redux";
 
-function Home() {
-
-
-    const [currencies, setcurrencies] = useState([])
+function Home(props) {
 
     useEffect( () => {
 
         fetch('http://api.nbp.pl/api/exchangerates/tables/c?format=json')
         .then(resp => resp.json())
-        .then(resp => setcurrencies( resp[0].rates ) )
-
+        .then( resp => props.save_currencies(resp[0].rates)  )
     }, [])
 
-    console.log( currencies )
+    const currencies_list =  props.currencies.map( item => <option>{ item.currency }</option>)
 
     return (
-        <div>
-            {  currencies.length === 0 ? <a>puste</a> : <a>tablica wypelniona</a> }
-        </div>
+        <>  
+            <div>
+                <select>
+                    { props.currencies.length === 0 ? <a>tablica pusta</a> : currencies_list }
+                </select>
+            </div>
+            <div>
+                info odnosnie aktywnej waluty
+            </div>
+        </>
     )
 }
 
-export default connect(() => ({}), {get_currencies})(Home)
+export default connect((state) => ({ currencies: state.currencies }), {save_currencies})(Home)

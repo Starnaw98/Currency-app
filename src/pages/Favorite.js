@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from "react-redux";
-import {get_currencies} from "../redux";
 
 function Home() {
     return (
@@ -10,4 +9,4 @@ function Home() {
     )
 }
 
-export default connect(() => ({}), {get_currencies})(Home)
+export default connect(() => ({}), {})(Home)

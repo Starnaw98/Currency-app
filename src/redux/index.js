@@ -1,17 +1,20 @@
 import {createStore} from 'redux'
 
-export const get_currencies = () => ({ type: "GET_CURRENCIES" })
+export const save_currencies = (currencies) => ({ 
+        type: "SAVE_CURRENCIES",
+        payload: currencies 
+    })
 
 const initialState = { 
-    currencies: ['sdfsda']
+    currencies: []
  }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case "GET_CURRENCIES": 
-
+        case "SAVE_CURRENCIES": 
             return {
-                ...state
+                ...state,
+                currencies: action.payload
             }
 
         default:
