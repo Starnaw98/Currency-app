@@ -9,4 +9,4 @@ function Home() {
     )
 }
 
-export default connect(() => ({}), {})(Home)
+export default connect((state) => ({ favorites: state.favorites }), {})(Home)

@@ -9,7 +9,7 @@ export default function Currency(props) {
             <h1>{currency}</h1>
             <p>Kurs kupna {ask}</p>
             <p>Kurs sprzedaży {bid}</p>
-            <button> Zapisz jako ulubiona </button>
+            <button onClick={ () => props.set_fav(currency) } > Zapisz jako ulubiona </button>
         </div>
     )
 }

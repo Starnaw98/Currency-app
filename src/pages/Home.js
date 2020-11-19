@@ -1,7 +1,7 @@
 import React, { useEffect} from 'react'
 import {connect} from "react-redux";
 import Currency from '../components/Currency';
-import {save_currencies, get_exact_currency} from "../redux";
+import {save_currencies, get_exact_currency, set_as_favorite} from "../redux";
 
 function Home(props) {
 
@@ -19,11 +19,11 @@ function Home(props) {
         <>  
             <div>
                 <select onChange={ e => props.get_exact_currency(e.target.value)  } >
-                    { props.currencies.length === 0 ? <a>tablica pusta</a> : currencies_list }
+                    {currencies_list}
                 </select>
             </div>
             <div>
-                {props.exact_currency.currency && <Currency choosed_currency={props.exact_currency} ></Currency> }
+                <Currency set_fav={ props.set_as_favorite } choosed_currency={props.exact_currency} ></Currency> 
             </div>
         </>
     )
@@ -33,4 +33,5 @@ function Home(props) {
 export default connect((state) => ({ 
     currencies: state.currencies, 
     exact_currency: state.exact_currency 
-}), {save_currencies, get_exact_currency})(Home)
+}), {save_currencies, get_exact_currency, set_as_favorite})(Home)
+
