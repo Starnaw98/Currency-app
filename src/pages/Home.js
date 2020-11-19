@@ -1,5 +1,6 @@
 import React, { useEffect} from 'react'
 import {connect} from "react-redux";
+import Currency from '../components/Currency';
 import {save_currencies, get_exact_currency} from "../redux";
 
 function Home(props) {
@@ -22,13 +23,14 @@ function Home(props) {
                 </select>
             </div>
             <div>
-                {props.exact_currency.currency}
-                {props.exact_currency.ask}
-                {props.exact_currency.bid}
-                <button> Zapisz jako ulubiona </button>
+                {props.exact_currency.currency && <Currency choosed_currency={props.exact_currency} ></Currency> }
             </div>
         </>
     )
 }
 
-export default connect((state) => ({ currencies: state.currencies, exact_currency: state.exact_currency }), {save_currencies, get_exact_currency})(Home)
+//connect redux with that component
+export default connect((state) => ({ 
+    currencies: state.currencies, 
+    exact_currency: state.exact_currency 
+}), {save_currencies, get_exact_currency})(Home)
