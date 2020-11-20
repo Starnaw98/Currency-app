@@ -74,7 +74,7 @@ const reducer = (state = initialState, action) => {
             const set_new_filtered = state.filtered_currencies.filter( obj => obj.currency !== action.payload )
             const set_new_favorites = state.favorite_currencies.filter( el => el !== action.payload )
 
-            const regex = new RegExp(`,?${action.payload}`,"gi")
+            const regex = new RegExp(`${action.payload},?`,"gi")
             const newLocalFav = localStorage.getItem('favorite').replaceAll(regex, '')
             localStorage.setItem('favorite', `${newLocalFav}`)
             
