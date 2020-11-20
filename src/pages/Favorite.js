@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import {connect} from "react-redux";
+import FavCurrency from '../components/FavCurrency';
 import { get_favorites } from '../redux'
 
 function Favorites(props) {
@@ -12,7 +13,20 @@ function Favorites(props) {
 
     return (
         <div>
-            { favorites.length === 0 ? <h1> Loading ... </h1> : <p> Jest </p> }
+            <table>
+                <caption>Ulubione waluty</caption>
+                <thead>
+                    <tr>
+                        <th> Kod </th>
+                        <th> Waluta </th>
+                        <th> Kurs kupna </th>
+                        <th> Kurs sprzedaży </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    { favorites.map( obj => <FavCurrency data={obj} ></FavCurrency> ) }
+                </tbody>
+            </table>
         </div>
     )
 }
