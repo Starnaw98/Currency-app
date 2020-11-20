@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import {connect} from "react-redux";
 import Favorites from './pages/Favorite'
 import Menu from './components/Menu'
-import {save_currencies} from "./redux";
+import {saveCurrencies} from "./redux";
 
 
 function App(props) {
@@ -12,7 +12,7 @@ function App(props) {
   useEffect( () => {
     fetch('http://api.nbp.pl/api/exchangerates/tables/c?format=json')
     .then(resp => resp.json())
-    .then( resp => props.save_currencies(resp[0].rates)  )
+    .then( resp => props.saveCurrencies(resp[0].rates)  )
   }, [])
 
   return (
@@ -26,5 +26,5 @@ function App(props) {
   );
 }
 
-export default connect(() => ({}), {save_currencies})(App)
+export default connect(() => ({}), {saveCurrencies})(App)
 

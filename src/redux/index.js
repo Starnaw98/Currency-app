@@ -1,33 +1,47 @@
 import { createStore } from 'redux'
 
-const save_currencies = (currencies) => ({
+const saveCurrencies = (currencies) => ({
     type: "SAVE_CURRENCIES",
     payload: currencies
 })
 
-const get_exact_currency = (currency) => ({
+const getExactCurrency = (currency) => ({
     type: "GET_EXACT_CURRENCY",
     payload: currency
 })
 
-const set_as_favorite = (favorite_currency) => ({
+const setAsFavorite = (favorite_currency) => ({
     type: "SET_FAVORITE",
     payload: favorite_currency
 })
 
-const get_favorites = () => ({
+const getFavorites = () => ({
     type: "GET_FAVORITES"
 })
 
-const delete_favorite = (deleted) => ({
+const deleteFavorite = (deleted) => ({
     type: "DELETE_FAVORITE",
     payload: deleted
 })
 
+const deleteAllFav = () => ({
+    type: "DELETE_ALL_FAVORITE"
+})
+
+
+const saved = localStorage.getItem('favorite');
+
+function returnSavedFavorites(){
+
+    const saved_minus_last = saved.substring(0, saved.length - 1);
+    return saved_minus_last.split(',')
+
+}
+
 const initialState = {
     currencies: [],
     exact_currency: {},
-    favorite_currencies: localStorage.getItem('favorite') === null ? [] : localStorage.getItem('favorite').split(','),
+    favorite_currencies: saved === null || saved.length === 0 ? [] : returnSavedFavorites(),
     filtered_currencies: []
 }
 
@@ -66,8 +80,8 @@ const reducer = (state = initialState, action) => {
         }
 
         case "GET_FAVORITES": {
-            const favorites_filter = (el) => state.favorite_currencies.find( favorite => el === favorite )
-            const fav_objects = state.currencies.filter( obj => obj.code === favorites_filter(obj.code) )
+            const favoritesFilter = (el) => state.favorite_currencies.find( favorite => el === favorite )
+            const fav_objects = state.currencies.filter( obj => obj.code === favoritesFilter(obj.code) )
             return {
                 ...state,
                 filtered_currencies: fav_objects
@@ -77,7 +91,7 @@ const reducer = (state = initialState, action) => {
         case "DELETE_FAVORITE": {
             const set_new_filtered = state.filtered_currencies.filter( obj => obj.code !== action.payload )
             const set_new_favorites = state.favorite_currencies.filter( el => el !== action.payload )
-            
+
             const regex = new RegExp(`${action.payload},?`, "gi")
             const newLocalFav = localStorage.getItem('favorite').replaceAll(regex, '')
             localStorage.setItem('favorite', `${newLocalFav}`)
@@ -86,6 +100,16 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 favorite_currencies: set_new_favorites,
                 filtered_currencies: set_new_filtered
+            }
+        }
+
+        case "DELETE_ALL_FAVORITE": {
+
+            localStorage.setItem('favorite', '')
+            return {
+                ...state,
+                favorite_currencies: [],
+                filtered_currencies: []
             }
         }
 
@@ -100,5 +124,5 @@ store.subscribe(() => {
 })
 
 export default store
-export { save_currencies, get_exact_currency, set_as_favorite, get_favorites, delete_favorite }
+export { saveCurrencies, getExactCurrency, setAsFavorite, getFavorites, deleteFavorite, deleteAllFav }
 

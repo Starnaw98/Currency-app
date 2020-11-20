@@ -2,22 +2,29 @@ import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
 import FavCurrency from '../components/FavCurrency';
 import Popup from '../components/Popup';
-import { get_favorites, delete_favorite } from '../redux'
+import { getFavorites, deleteFavorite, deleteAllFav } from '../redux'
 
 function Favorites(props) {
 
-    const { get_favorites, delete_favorite, favorites, currencies } = props
+    const { getFavorites, deleteFavorite, deleteAllFav, favorites, currencies } = props
 
     const [popupOpen, setpopupOpen] = useState(false)
-    const [deletedItem, setdeletedItem] = useState("")
+    const [delete_item, setdeletedItem] = useState("")
+    const [deleteAllOrOne, setdeleteAllOrOne ] = useState("")
 
     useEffect(() => {
-        get_favorites();
+        getFavorites();
     }, [currencies])
 
     return (
         <div>
-            {popupOpen && <Popup turn_off_or_on={setpopupOpen} deleted_element={deletedItem} deleting_fun={delete_favorite} />}
+            { popupOpen && 
+                <Popup 
+                    turn_off_or_on={setpopupOpen} 
+                    deleted_element={delete_item} 
+                    deleting_fun={ deleteAllOrOne === 'all' ? deleteAllFav : deleteFavorite } 
+                />
+            }
             <table>
                 <caption>Ulubione waluty</caption>
                 <thead>
@@ -31,10 +38,17 @@ function Favorites(props) {
                 <tbody>
                     {
                         favorites.map(obj =>
-                            <FavCurrency data={obj} popup_fun={setpopupOpen} set_deleted={setdeletedItem} ></FavCurrency>)
+                            <FavCurrency key={obj.code} data={obj} popup_fun={setpopupOpen} set_deleted={setdeletedItem} ></FavCurrency>)
                     }
                 </tbody>
             </table>
+            <div>
+                <button 
+                    disabled={ favorites.length !== 0 ? false : true } 
+                    onClick={ () => { setdeleteAllOrOne('all'); setpopupOpen( prev => !prev ) } }
+                > Usuń całą listę 
+                </button>
+            </div>
         </div>
     )
 }
@@ -43,4 +57,4 @@ export default connect((state) => ({
     favorites: state.filtered_currencies,
     currencies: state.currencies
 }),
-    { get_favorites, delete_favorite })(Favorites)
+    { getFavorites, deleteFavorite, deleteAllFav })(Favorites)
