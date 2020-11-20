@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import {connect} from "react-redux";
 import { get_favorites } from '../redux'
 
 function Favorites(props) {
     
-    const { get_favorites, favorites, exact_currency  } = props
+    const { get_favorites, favorites, currencies  } = props
 
     useEffect( () => {
         get_favorites();
-    },[exact_currency])
+    },[currencies])
 
     return (
         <div>
@@ -17,4 +17,8 @@ function Favorites(props) {
     )
 }
 
-export default connect((state) => ({ favorites: state.filtered_currencies, exact_currency: state.exact_currency }), {get_favorites})(Favorites)
+export default connect( (state) => ({ 
+    favorites: state.filtered_currencies, 
+    currencies: state.currencies 
+}), 
+{get_favorites})(Favorites)
