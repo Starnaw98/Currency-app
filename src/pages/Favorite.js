@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import {connect} from "react-redux";
 import FavCurrency from '../components/FavCurrency';
-import { get_favorites } from '../redux'
+import { get_favorites, delete_favorite } from '../redux'
 
 function Favorites(props) {
     
-    const { get_favorites, favorites, currencies  } = props
+    const { get_favorites, delete_favorite, favorites, currencies  } = props
 
     useEffect( () => {
         get_favorites();
@@ -24,7 +24,7 @@ function Favorites(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    { favorites.map( obj => <FavCurrency data={obj} ></FavCurrency> ) }
+                    { favorites.map( obj => <FavCurrency data={obj} delete_fun={delete_favorite} ></FavCurrency> ) }
                 </tbody>
             </table>
         </div>
@@ -35,4 +35,4 @@ export default connect( (state) => ({
     favorites: state.filtered_currencies, 
     currencies: state.currencies 
 }), 
-{get_favorites})(Favorites)
+{get_favorites, delete_favorite})(Favorites)

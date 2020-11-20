@@ -10,7 +10,7 @@ export default function FavCurrency(props) {
             <td> {currency} </td>
             <td> {ask} </td>
             <td> {bid} </td>
-            <td> <button> Usuń </button> </td>
+            <td> <button onClick={ () => props.delete_fun(currency) } > Usuń </button> </td>
         </tr> 
     )
 }

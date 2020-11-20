@@ -19,6 +19,11 @@ const get_favorites = () => ({
     type: "GET_FAVORITES"
 })
 
+const delete_favorite = (deleted) => ({
+    type: "DELETE_FAVORITE",
+    payload: deleted
+})
+
 const initialState = {
     currencies: [],
     exact_currency: {},
@@ -49,7 +54,6 @@ const reducer = (state = initialState, action) => {
                 return state
             } else {
                 localStorage.setItem('favorite', `${action.payload},${state.favorite_currencies}`)
-
                 return {
                     ...state,
                     favorite_currencies: [...state.favorite_currencies, action.payload]
@@ -57,14 +61,25 @@ const reducer = (state = initialState, action) => {
             }
         }
 
-
         case "GET_FAVORITES": {
-
             const favorites_filter = (el) => state.favorite_currencies.find( favorite => el === favorite )
             const fav_objects = state.currencies.filter( obj => obj.currency === favorites_filter(obj.currency) )
             return {
                 ...state,
                 filtered_currencies: fav_objects
+            }
+        }
+
+        case "DELETE_FAVORITE": {
+            const set_new_filtered = state.filtered_currencies.filter( obj => obj.currency !== action.payload )
+            const set_new_favorites = state.favorite_currencies.filter( el => el !== action.payload )
+
+            localStorage.setItem('favorite', `${set_new_favorites}`)
+            
+            return {
+                ...state,
+                favorite_currencies: set_new_favorites,
+                filtered_currencies: set_new_filtered
             }
         }
 
@@ -79,5 +94,5 @@ store.subscribe(() => {
 })
 
 export default store
-export { save_currencies, get_exact_currency, set_as_favorite, get_favorites }
+export { save_currencies, get_exact_currency, set_as_favorite, get_favorites, delete_favorite }
 
