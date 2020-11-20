@@ -53,17 +53,21 @@ const reducer = (state = initialState, action) => {
             if (state.favorite_currencies.some(el => el === action.payload)) {
                 return state
             } else {
-                localStorage.setItem('favorite', `${action.payload},${state.favorite_currencies}`)
-                return {
-                    ...state,
-                    favorite_currencies: [...state.favorite_currencies, action.payload]
+
+                    let favorites = "";
+                    [action.payload, ...state.favorite_currencies].forEach( el => favorites += `${el},` )
+                    localStorage.setItem('favorite', favorites)
+
+                    return {
+                        ...state,
+                        favorite_currencies: [...state.favorite_currencies, action.payload]
+                    }
                 }
-            }
         }
 
         case "GET_FAVORITES": {
             const favorites_filter = (el) => state.favorite_currencies.find( favorite => el === favorite )
-            const fav_objects = state.currencies.filter( obj => obj.currency === favorites_filter(obj.currency) )
+            const fav_objects = state.currencies.filter( obj => obj.code === favorites_filter(obj.code) )
             return {
                 ...state,
                 filtered_currencies: fav_objects
@@ -71,10 +75,10 @@ const reducer = (state = initialState, action) => {
         }
 
         case "DELETE_FAVORITE": {
-            const set_new_filtered = state.filtered_currencies.filter( obj => obj.currency !== action.payload )
+            const set_new_filtered = state.filtered_currencies.filter( obj => obj.code !== action.payload )
             const set_new_favorites = state.favorite_currencies.filter( el => el !== action.payload )
-
-            const regex = new RegExp(`${action.payload},?`,"gi")
+            
+            const regex = new RegExp(`${action.payload},?`, "gi")
             const newLocalFav = localStorage.getItem('favorite').replaceAll(regex, '')
             localStorage.setItem('favorite', `${newLocalFav}`)
             
