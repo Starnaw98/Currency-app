@@ -1,11 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Home from './pages/Home';
+import {connect} from "react-redux";
 import Favorites from './pages/Favorite'
 import Menu from './components/Menu'
+import {save_currencies} from "./redux";
 
 
-export default function App(props) {
+function App(props) {
+
+  useEffect( () => {
+    fetch('http://api.nbp.pl/api/exchangerates/tables/c?format=json')
+    .then(resp => resp.json())
+    .then( resp => props.save_currencies(resp[0].rates)  )
+  }, [])
 
   return (
     <>
@@ -17,3 +25,6 @@ export default function App(props) {
     </>
   );
 }
+
+export default connect(() => ({}), {save_currencies})(App)
+
