@@ -1,26 +1,32 @@
 import React from "react";
 import { connect } from "react-redux";
 import Currency from "../components/Currency";
-import { getExactCurrency, setAsFavorite } from "../redux";
+import { setAsFavorite } from "../redux/reducers/favoriteCurrencies";
+import { getExactCurrency } from "../redux/reducers/choosedCurrency";
 
 function Home(props) {
-  const { getExactCurrency, setAsFavorite, exact_currency, currencies } = props;
+  const {
+    getExactCurrency,
+    setAsFavorite,
+    exact_currency,
+    currencies
+  } = props;
 
   return (
     <>
       <div>
-        <select onChange={(e) => getExactCurrency(e.target.value)}>
-          {currencies.map((item) => (
-            <option key={item.code}>{item.currency}</option>
-          ))}
+        <select value={exact_currency.currency} onChange={(e) => getExactCurrency({ currency: e.target.value, currencies: currencies })}>
+          {currencies.map((item) => <option key={item.code}> {item.currency} </option>)}
         </select>
       </div>
 
       <div>
-        <Currency
-          set_fav={setAsFavorite}
-          choosed_currency={exact_currency}
-        ></Currency>
+        {
+          currencies.length !== 0 && <Currency
+            set_fav={setAsFavorite}
+            choosed_currency={exact_currency.code ? exact_currency : currencies[0]}
+          ></Currency>
+        }
       </div>
     </>
   );

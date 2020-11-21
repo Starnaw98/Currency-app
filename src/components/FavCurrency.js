@@ -1,7 +1,12 @@
 import React from "react";
 
 export default function FavCurrency(props) {
-  const { code, currency, ask, bid } = props.data;
+  const {
+    code,
+    currency,
+    ask,
+    bid
+  } = props.data;
 
   return (
     <tr>

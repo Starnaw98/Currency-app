@@ -1,7 +1,13 @@
 import React from "react";
 
 export default function Currency(props) {
-  const { currency, ask, bid, code } = props.choosed_currency;
+
+  const {
+    currency,
+    ask,
+    bid,
+    code
+  } = props.choosed_currency;
 
   return (
     <div>
@@ -9,8 +15,7 @@ export default function Currency(props) {
       <p>Kurs kupna {ask}</p>
       <p>Kurs sprzedaży {bid}</p>
       <button onClick={() => props.set_fav(code)}>
-        {" "}
-        Zapisz jako ulubiona{" "}
+        Zapisz jako ulubiona
       </button>
     </div>
   );

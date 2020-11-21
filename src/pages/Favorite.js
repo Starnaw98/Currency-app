@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import FavCurrency from "../components/FavCurrency";
 import Popup from "../components/Popup";
-import { getFavorites, deleteFavorite, deleteAllFav } from "../redux";
+import { getFavorites, deleteFavorite, deleteAllFav } from "../redux/reducers/favoriteCurrencies";
 
 function Favorites(props) {
   const {
@@ -18,7 +18,7 @@ function Favorites(props) {
   const [deleteAllOrOne, setdeleteAllOrOne] = useState("");
 
   useEffect(() => {
-    getFavorites();
+    getFavorites(currencies);
   }, [currencies]);
 
   return (
@@ -61,7 +61,6 @@ function Favorites(props) {
             setpopupOpen((prev) => !prev);
           }}
         >
-          {" "}
           Usuń całą listę
         </button>
       </div>
@@ -71,7 +70,7 @@ function Favorites(props) {
 
 export default connect(
   (state) => ({
-    favorites: state.filtered_currencies,
+    favorites: state.favorites.filtered_currencies,
     currencies: state.currencies,
   }),
   { getFavorites, deleteFavorite, deleteAllFav }

@@ -4,9 +4,11 @@ import Home from "./pages/Home";
 import { connect } from "react-redux";
 import Favorites from "./pages/Favorite";
 import Menu from "./components/Menu";
-import { saveCurrencies } from "./redux";
+import { saveCurrencies } from "./redux/reducers/allCurrencies";
 
+//After app reloading, save all currencies in  redux.
 function App(props) {
+
   useEffect(() => {
     fetch("http://api.nbp.pl/api/exchangerates/tables/c?format=json")
       .then((resp) => resp.json())
