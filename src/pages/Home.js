@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 import { connect } from "react-redux";
-import Currency from '../components/Currency';
+import Currency from "../components/Currency";
 import { getExactCurrency, setAsFavorite } from "../redux";
 
 function Home(props) {
 
-    const { getExactCurrency, setAsFavorite, exact_currency, currencies } = props
+    const { getExactCurrency, setAsFavorite, exact_currency, currencies } = props;
 
     return (
         <>
@@ -18,12 +18,12 @@ function Home(props) {
                 <Currency set_fav={setAsFavorite} choosed_currency={exact_currency} ></Currency>
             </div>
         </>
-    )
+    );
 }
 
 export default connect((state) => ({
     currencies: state.currencies,
     exact_currency: state.exact_currency
 }),
-    { getExactCurrency, setAsFavorite })(Home)
+    { getExactCurrency, setAsFavorite })(Home);
 

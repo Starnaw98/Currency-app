@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 export default function Currency(props) {
 
@@ -11,5 +11,5 @@ export default function Currency(props) {
             <p>Kurs sprzedaży {bid}</p>
             <button onClick={ () => props.set_fav(code) } > Zapisz jako ulubiona </button>
         </div>
-    )
+    );
 }

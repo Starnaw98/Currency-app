@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 
 export default function FavCurrency(props) {
 
-    const { code, currency, ask, bid } = props.data
+    const { code, currency, ask, bid } = props.data;
 
     return (
         <tr>
@@ -11,10 +11,10 @@ export default function FavCurrency(props) {
             <td> {ask} </td>
             <td> {bid} </td>
             <td>
-                <button onClick={() => { props.popup_fun(prev => !prev); props.set_deleted(code) }} >
+                <button onClick={() => { props.popup_fun(prev => !prev); props.set_deleted(code); }} >
                     Usuń
                 </button>
             </td>
         </tr>
-    )
+    );
 }
