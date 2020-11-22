@@ -8,8 +8,8 @@ import { saveCurrencies } from "./redux/reducers/allCurrencies";
 
 function App(props) {
 
-  const [isFetched, setisFetched] = useState(false)
-  const [loadingInfo, setloadingInfo] = useState("loading")
+  const [isFetched, setisFetched] = useState(false);
+  const [loadingInfo, setloadingInfo] = useState("loading");
 
   useEffect(() => {
 
@@ -18,11 +18,11 @@ function App(props) {
       .then((resp) => {
         props.saveCurrencies(resp[0].rates);
         setloadingInfo("Kantor");
-        setisFetched(true)
+        setisFetched(true);
       })
       .catch(() => {
         setloadingInfo("Przepraszamy, serwis chwilowo nieczynny.");
-        new Error('Błąd podczas pobierania danych')
+        new Error("Błąd podczas pobierania danych");
       });
 
   }, []);
@@ -49,6 +49,6 @@ function App(props) {
           null
       }
     </>
-  )
+  );
 }
 export default connect(() => ({}), { saveCurrencies })(App);
