@@ -9,7 +9,7 @@ import { saveCurrencies } from "./redux/reducers/allCurrencies";
 function App(props) {
 
   const [isFetched, setisFetched] = useState(false)
-  const [loadingInfo, setloadingInfo] = useState("Loading")
+  const [loadingInfo, setloadingInfo] = useState("loading")
 
   useEffect(() => {
 
@@ -17,6 +17,7 @@ function App(props) {
       .then((resp) => resp.json())
       .then((resp) => {
         props.saveCurrencies(resp[0].rates);
+        setloadingInfo("Kantor");
         setisFetched(true)
       })
       .catch(() => {
@@ -27,21 +28,25 @@ function App(props) {
   }, []);
 
   return (
-    isFetched ?
-      <>
-        <Menu />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/favorites">
-            <Favorites />
-          </Route>
-        </Switch>
-      </>
-      :
+    <>
       <h1> {loadingInfo} </h1>
-
+      {
+        isFetched ?
+          <>
+            <Menu />
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/favorites">
+                <Favorites />
+              </Route>
+            </Switch>
+          </>
+          :
+          null
+      }
+    </>
   )
 }
 export default connect(() => ({}), { saveCurrencies })(App);
