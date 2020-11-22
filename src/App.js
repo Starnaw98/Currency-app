@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import Favorites from "./pages/Favorite";
 import Menu from "./components/Menu";
 import { saveCurrencies } from "./redux/reducers/allCurrencies";
-import './styles/style.scss'
 
 function App(props) {
 
