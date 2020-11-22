@@ -33,16 +33,16 @@ function App(props) {
       {
         isFetched ?
           <>
-            <Menu />
             <BrowserRouter>
-              <Switch>
-                <Route exact path="/">
-                  <Home />
-                </Route>
-                <Route path="/favorites">
-                  <Favorites />
-                </Route>
-              </Switch>
+                <Menu />
+                <Switch>
+                  <Route exact path="/">
+                    <Home />
+                  </Route>
+                  <Route path="/favorites">
+                    <Favorites />
+                  </Route>
+                </Switch>
             </BrowserRouter>
           </>
           :
