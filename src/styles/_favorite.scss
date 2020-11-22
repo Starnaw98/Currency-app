@@ -1,0 +1,59 @@
+@import './mixins';
+
+.favorite table{
+
+
+    caption{
+        font-size: 2rem;
+        margin: 4rem 0;
+    }
+
+    font-family: 'Arial';
+    border-collapse: collapse;
+    border: 1px solid black;
+    
+    tr {
+       &:hover {
+        background: #f4f4f4;
+        
+        td {
+          color: #555;
+        }
+      }
+    }
+
+    th, td {
+      color: rgb(99, 99, 99);
+      border: 1px solid #eee;
+      padding: 12px 35px;
+      border-collapse: collapse;
+        & button{
+            width: 100%;
+            font-weight: 600;
+        }
+    }
+    th {
+      background: rgb(253, 182, 76);
+      color: black;
+      text-transform: uppercase;
+      font-size: 12px;
+      &.last {
+        border-right: none;
+      }
+      & button{
+          padding: 0.5rem
+      }
+    }
+
+    td{
+        button{
+            background-color: rgba(255, 255, 255, 0);
+            border: 0;
+            cursor: pointer;
+                &:hover{
+                    background-color: #f4f4f4;
+                }
+        }
+    }
+
+}

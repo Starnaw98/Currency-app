@@ -1,3 +1,31 @@
-body{
-    background-color: red;
+@import './mixins';
+@import './home';
+@import './menu';
+@import './favorite';
+@import './popup';
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html, #root{
+    height: 100%;
+    width: 100%;
+    font-size: 16px;
+    @include display-flex( column, flex-start, center );
+    font-family: 'Arial';
+}
+
+.intro_header{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 4rem 0 2rem 0;
+    letter-spacing: 8px;
+    font-size: 4rem;
+}
+.intro_header:first-letter {
+    color:rgb(253, 182, 76);
 }

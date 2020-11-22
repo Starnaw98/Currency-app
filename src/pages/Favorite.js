@@ -22,7 +22,7 @@ function Favorites(props) {
   }, [currencies]);
 
   return (
-    <div>
+    <div className="favorite" >
       {popupOpen && (
         <Popup
           turn_off_or_on={setpopupOpen}
@@ -40,6 +40,17 @@ function Favorites(props) {
             <th> Waluta </th>
             <th> Kurs kupna </th>
             <th> Kurs sprzedaży </th>
+            <th>
+              <button
+                disabled={favorites.length !== 0 ? false : true}
+                onClick={() => {
+                  setdeleteAllOrOne("all");
+                  setpopupOpen((prev) => !prev);
+                }}
+              >
+                Usuń listę
+              </button>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -53,17 +64,6 @@ function Favorites(props) {
           ))}
         </tbody>
       </table>
-      <div>
-        <button
-          disabled={favorites.length !== 0 ? false : true}
-          onClick={() => {
-            setdeleteAllOrOne("all");
-            setpopupOpen((prev) => !prev);
-          }}
-        >
-          Usuń całą listę
-        </button>
-      </div>
     </div>
   );
 }

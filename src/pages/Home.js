@@ -14,13 +14,14 @@ function Home(props) {
 
   return (
     <>
-      <div>
+      <div className="select" >
+        <p>Wybierz walutę:</p>
         <select value={exact_currency.currency} onChange={(e) => getExactCurrency({ currency: e.target.value, currencies: currencies })}>
           {currencies.map((item) => <option key={item.code}> {item.currency} </option>)}
         </select>
       </div>
 
-      <div>
+      <div className="choosed_currency" >
         {
           currencies.length !== 0 && <Currency
             set_fav={setAsFavorite}

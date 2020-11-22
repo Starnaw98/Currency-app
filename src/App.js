@@ -30,7 +30,7 @@ function App(props) {
 
   return (
     <>
-      <h1> {loadingInfo} </h1>
+      <h1 className="intro_header" > {loadingInfo} </h1>
       {
         isFetched ?
           <>

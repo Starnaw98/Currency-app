@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 export default function Menu() {
   return (
-    <ul>
+    <ul className="menu" >
       <li>
-        <Link to="/">Strona główna</Link>
+        <Link to="/">Waluty</Link>
       </li>
       <li>
         <Link to="/favorites">Ulubione</Link>
