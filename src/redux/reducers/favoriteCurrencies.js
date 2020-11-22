@@ -25,12 +25,12 @@ function returnSavedFavorites() {
     return saved_minus_last.split(",");
 }
 
-const setFavorites = saved === null || saved.length === 0 ? [] : returnSavedFavorites()
+const setFavorites = saved === null || saved.length === 0 ? [] : returnSavedFavorites();
 
 const initialState = {
     favorite_currencies: setFavorites,
     filtered_currencies: []
-}
+};
 
 export default function favoriteCurrenciesLogic(state = initialState, action) {
 
@@ -98,7 +98,7 @@ export default function favoriteCurrenciesLogic(state = initialState, action) {
         default:
             return state;
     }
-};
+}
 
 export {
     setAsFavorite,

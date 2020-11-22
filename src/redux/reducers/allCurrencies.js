@@ -7,9 +7,9 @@ export const saveCurrencies = (currencies) => ({
 export default function allCurrencies(currencies = [], action) {
     switch (action.type) {
         case "SAVE_CURRENCIES":
-            return action.payload
+            return action.payload;
 
         default:
             return currencies;
     }
-};
+}

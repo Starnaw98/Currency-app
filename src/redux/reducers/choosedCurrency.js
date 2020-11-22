@@ -13,10 +13,10 @@ export default function choosedCurrency(exact_currency = {}, action) {
             const exact_element = action.payload.currencies.filter(
                 (el) => el.currency === action.payload.currency
             );
-            return exact_element[0]
+            return exact_element[0];
         }
 
         default:
             return exact_currency;
     }
-};
+}
