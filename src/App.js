@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import { connect } from "react-redux";
 import Favorites from "./pages/Favorite";
@@ -34,14 +34,16 @@ function App(props) {
         isFetched ?
           <>
             <Menu />
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route path="/favorites">
-                <Favorites />
-              </Route>
-            </Switch>
+            <BrowserRouter>
+              <Switch>
+                <Route exact path="/">
+                  <Home />
+                </Route>
+                <Route path="/favorites">
+                  <Favorites />
+                </Route>
+              </Switch>
+            </BrowserRouter>
           </>
           :
           null
