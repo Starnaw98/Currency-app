@@ -5,15 +5,27 @@ import App from '../src/App'
 import validNBP from '../__mocks__/validNBP.json'
 import store from "../src/redux";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
 
-global.fetch = jest.fn( () => Promise.resolve({ 
-    json: () => Promise.resolve(validNBP)
-}))
 
 
 it( 'load data on mount', async () => {
-    await act( async () => render( <Provider store={store} ><Router><App /></Router> </Provider> ) )
+
+    global.fetch = jest.fn( () => Promise.resolve({ 
+        json: () => Promise.resolve(validNBP)
+    }))
+
+    await act( async () => render( <Provider store={store} > <App />  </Provider> ) )
     expect(screen.getByText("Kantor")).toBeInTheDocument()
+})
+
+
+it( 'error after fetching', async () => {
+
+    global.fetch = jest.fn( () => Promise.resolve({ 
+        json: () => Promise.reject({ error: "Cannot fetch data" })
+    }))
+
+    await act( async () => render( <Provider store={store} > <App />  </Provider> ) )
+    expect(screen.getByText("Przepraszamy, serwis chwilowo nieczynny.")).toBeInTheDocument()
 })
 
