@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: "development",
@@ -21,6 +22,10 @@ module.exports = {
         use: ["babel-loader"],
       },
       {
+        test: /\.scss$/,
+        use: [MiniCssExtractPlugin.loader,"css-loader","sass-loader"],
+      },
+      {
         test: "/html$/",
         use: [
           {
@@ -39,5 +44,8 @@ module.exports = {
       template: "./src/index.html",
       filename: "./index.html",
     }),
+    new MiniCssExtractPlugin({
+      filename: "[name].[contenthash:5].css",
+    })
   ],
 };
