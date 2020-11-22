@@ -13,7 +13,7 @@
 body, html, #root{
     height: 100%;
     width: 100%;
-    font-size: 16px;
+    font-size: 14px;
     @include display-flex( column, flex-start, center );
     font-family: 'Arial';
 }

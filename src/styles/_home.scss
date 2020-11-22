@@ -27,6 +27,7 @@
 
 .choosed_currency{
     @include display-flex( column, center, center );
+    margin-bottom: 2rem;
         & div{
             width: 100%;
             @include display-flex( row, center, center );
